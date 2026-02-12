@@ -1,6 +1,7 @@
 var params = new URLSearchParams(window.location.search);
-document.querySelector(".login").addEventListener('click', () => {
-    toHome();
+document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.querySelector(".login");
+    if (btn) { btn.addEventListener('click', toHome); }
 });
 var welcome = "Dzień dobry!";
 var date = new Date();
@@ -8,8 +9,17 @@ if (date.getHours() >= 18){
     welcome = "Dobry wieczór!"
 }
 document.querySelector(".welcome").innerHTML = welcome;
+function basePath(){
+    var parts = window.location.pathname.split('/').filter(Boolean);
+    var known = ['home','services','documents','qr','more','card','qrscan'];
+    var first = parts[0] || '';
+    return known.indexOf(first)>=0 ? '/' : '/' + first + '/';
+}
 function toHome(){
-    location.href = 'home/?' + params;
+    var q = params.toString();
+    var href = basePath() + 'home/';
+    if (q) { href += '?' + q; }
+    location.href = href;
 }
 var input = document.querySelector(".password_input");
 input.addEventListener("keypress", (event) => {

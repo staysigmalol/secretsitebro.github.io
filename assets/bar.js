@@ -1,6 +1,15 @@
 var params = new URLSearchParams(window.location.search);
+function basePath(){
+    var parts = window.location.pathname.split('/').filter(Boolean);
+    var known = ['home','services','documents','qr','more','card','qrscan'];
+    var first = parts[0] || '';
+    return known.indexOf(first)>=0 ? '/' : '/' + first + '/';
+}
 function sendTo(url){
-    location.href = `/${url}?` + params;
+    var q = params.toString();
+    var href = basePath() + url + '/';
+    if (q) { href += '?' + q; }
+    location.href = href;
 }
 document.querySelectorAll(".bottom_element_grid").forEach((element) => {
     element.addEventListener('click', () => {
