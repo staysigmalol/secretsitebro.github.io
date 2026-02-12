@@ -99,7 +99,7 @@
     margin-right: 0;
 }
 
-.services_grid {
+.services_grid{
     display: grid;
     width: 110%;
     margin-left: -5%;
@@ -115,23 +115,22 @@
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
-    cursor: pointer;
 }
 
-.service_box_icon {
-    width: 32px;
+.service_box_icon{
+    width: 40px;
     background-color: white;
-    border-radius: 16px;
-    padding: 16px;
+    border-radius: 20px;
+    padding: 20px;
     margin-left: auto;
     margin-right: auto;
     display: block;
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
-.service_box_name {
-    margin-top: 4px;
+.service_box_name{
+    margin-top: 5px;
     text-align: center;
-    font-size: 11px;
-    opacity: 0.6;
+    font-size: 13px;
+    opacity: 0.5;
 }
