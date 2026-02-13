@@ -1077,7 +1077,6 @@ body .bottom_bar{
     font-family: "Poppins", sans-serif;
     cursor: pointer;
     background-color: white;
-    margin-top: 20px;
 }
 .qr_scan_button:active{
     background-color: #f1f4fb;
