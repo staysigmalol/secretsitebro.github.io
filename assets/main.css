@@ -1069,7 +1069,7 @@ body .bottom_bar{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 15px;
+    margin-bottom: 10px;
     border-radius: 22px;
     border: 1.4px solid #1b2a4b;
     color: #1b2a4b;
