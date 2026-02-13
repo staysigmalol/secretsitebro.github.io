@@ -272,7 +272,7 @@
   if(addrEl){ addrEl.innerHTML=address; }
   var photo=document.querySelector('.id_own_image');
   if(photo){ photo.src=image; }
-  function qrShow(){ sendTo('qrshow'); }
+  function qrShow(){ sendTo('qr'); }
   document.querySelectorAll('.info_holder').forEach(function(el){
     el.addEventListener('click',function(){ el.classList.toggle('unfolded'); });
   });
