@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root{
-    --home: url('../home/home.png');
-    --home-open: url('../home/homeopen.png');
-    --documents: url('../home/dokumenty.png');
-    --documents-open: url('../home/dokumentyopen.png');
-    --services: url('../home/uslugi.png');
-    --services-open: url('../home/uslugiopen.png');
-    --qr: url('../home/kodqr.png');
-    --qr-open: url('../home/kodqropen.png');
-    --more: url('../home/wiecej.png');
-    --more-open: url('../home/wiecejopen.png');
+    --home: url('/home/home.png');
+    --home-open: url('/home/homeopen.png');
+    --documents: url('/home/dokumenty.png');
+    --documents-open: url('/home/dokumentyopen.png');
+    --services: url('/home/uslugi.png');
+    --services-open: url('/home/uslugiopen.png');
+    --qr: url('/home/kodqr.png');
+    --qr-open: url('/home/kodqropen.png');
+    --more: url('/home/wiecej.png');
+    --more-open: url('/home/wiecejopen.png');
     --text: #024b97;
     --shadow: 0px 0px 10px rgb(224, 224, 224);
 }
@@ -158,7 +158,7 @@ p, input{
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 100px;
+    height: 70px;
     z-index: 1;
 }
 
@@ -509,7 +509,7 @@ body .bottom_bar{
 .bottom_text{
     font-size: 18px;
     font-weight: bold;
-    margin-top: 32px;
+    margin-top: auto;
     margin-bottom: auto;
     margin-left: 17px;
 }
@@ -529,7 +529,7 @@ body .bottom_bar{
 .bottom_image{
     pointer-events: none;
     width: 32px;
-    margin-top: 30px;
+    margin-top: auto;
     margin-bottom: auto;
 }
 
@@ -647,7 +647,7 @@ body .bottom_bar{
 
 
 .time_text{
-    margin-top: 12px;
+
     margin-bottom: 20px;
     color: #666b72;
     margin-left: auto;
@@ -666,6 +666,10 @@ body .bottom_bar{
     margin-bottom: 10px;
     overflow: hidden;
     transition: 200ms; 
+}
+
+.info_holder .bottom_grid{
+    height: 70px;
 }
 
 .info_holder{
@@ -776,6 +780,19 @@ body .bottom_bar{
     margin-bottom: 40px;
 }
 
+.card{
+    background-size: 100%;
+    width: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 220px;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    margin-bottom: 20px;
+}
+
 .card_inner{
     width: 85%;
     height: 80%;
@@ -866,7 +883,7 @@ body .bottom_bar{
     height: max-content;
 }
 
-.confirm_box {
+.confirm_box .main_button{
     position: absolute;
     right: 10px;
     top: 0;
