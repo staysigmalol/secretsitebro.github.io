@@ -1,15 +1,18 @@
 var params = new URLSearchParams(window.location.search);
-function basePath(){
-    var parts = window.location.pathname.split('/').filter(Boolean);
-    var known = ['home','services','documents','qr','more','card','qrscan'];
-    var first = parts[0] || '';
-    return known.indexOf(first)>=0 ? '/' : '/' + first + '/';
+function _mwBasePrefix(){
+    var host = String(location.hostname || '');
+    var parts = String(location.pathname || '').split('/').filter(Boolean);
+    if (host.endsWith('github.io') && parts.length >= 1){
+        return '/' + parts[0];
+    }
+    return '';
 }
 function sendTo(url){
-    var q = params.toString();
-    var href = basePath() + url + '/';
-    if (q) { href += '?' + q; }
-    location.href = href;
+    var base = _mwBasePrefix();
+    var target = new URL(location.href);
+    target.pathname = base + '/' + url;
+    target.search = params.toString();
+    location.href = target.toString();
 }
 document.querySelectorAll(".bottom_element_grid").forEach((element) => {
     element.addEventListener('click', () => {

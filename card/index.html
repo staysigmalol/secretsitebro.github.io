@@ -125,7 +125,7 @@
         <div class="inset">
 
         </div>
-        <img src="idphoto.png" class="id_own_image"></img>
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="id_own_image"></img>
          <img src="sW5KVOE.gif" class="flag_video">
          <img src="9ipf8YT.gif" class="eagle_video">
         <div class="id_data_grid">
@@ -227,8 +227,76 @@
 <script src="../assets/img-fallback.js"></script>
 <script src="../assets/manifest.js"></script>
 <script>
+  var PROFILES={
+    oliwier:{
+      name:'OLIWIER',
+      surname:'SZULC',
+      nationality:'POLSKIE',
+      birthday:'15.09.2007',
+      familyName:'Szulc',
+      sex:'m',
+      fathersFamilyName:'Szulc',
+      mothersFamilyName:'Kaczmarek',
+      birthPlace:'Wrocław',
+      countryOfBirth:'Polska',
+      adress1:'Rolna 43B',
+      adress2:'61-259',
+      city:'Poznań',
+      pesel:'07291502957',
+      image:'idphoto.png'
+    },
+    mateusz:{
+      name:'MATEUSZ',
+      surname:'TOBOLSKI',
+      nationality:'POLSKIE',
+      birthday:'24.04.2007',
+      familyName:'TOBOLSKI',
+      sex:'m',
+      fathersFamilyName:'Tobolski',
+      mothersFamilyName:'Kmieciak',
+      birthPlace:'Warszawa',
+      countryOfBirth:'Polska',
+      adress1:'Nowogrodzka 35',
+      adress2:'22-511',
+      city:'Warszawa',
+      pesel:'07241993537',
+      image:'idphoto2.png'
+    },
+    iga:{
+      name:'IGA',
+      surname:'BIAŁOBŁOCKA',
+      nationality:'POLSKIE',
+      birthday:'26.09.2007',
+      familyName:'BIAŁOBŁOCKA',
+      sex:'m',
+      fathersFamilyName:'Białobłocki',
+      mothersFamilyName:'Morawska',
+      birthPlace:'Poznań',
+      countryOfBirth:'Polska',
+      adress1:'Ochota 8',
+      adress2:'61-259',
+      city:'Poznań',
+      pesel:'07292613659',
+      image:'idphoto3.png'
+    }
+  };
+  function _mwCleanPerson(v){ return String(v||'').toLowerCase().trim().replace(/[^a-z0-9_-]/g,''); }
+  function _mwGetPerson(){
+    var sp=new URLSearchParams(location.search);
+    var q=_mwCleanPerson(sp.get('person'));
+    if(q){ return q; }
+    try{ return _mwCleanPerson(localStorage.getItem('mw_person')); }catch(e){ return ''; }
+  }
+  var person=_mwGetPerson();
+  var defaults=(person && PROFILES[person]) ? PROFILES[person] : {};
   var p=new URLSearchParams(location.search);
-  function val(k,d){ var v=p.get(k); return v&&v.trim()?v:d; }
+  function val(k,d){
+    var v=p.get(k);
+    if(v && v.trim()){ return v; }
+    var dv=defaults[k];
+    if(dv !== undefined && dv !== null && String(dv).trim()){ return String(dv); }
+    return d;
+  }
   function pad(n){ return String(n).padStart(2,'0'); }
   function formatNow(){
     var d=new Date();
@@ -271,7 +339,20 @@
   var addrEl=document.getElementById('adress');
   if(addrEl){ addrEl.innerHTML=address; }
   var photo=document.querySelector('.id_own_image');
-  if(photo){ photo.src=image; }
+  if(photo){
+    photo.classList.remove('loaded');
+    var finalSrc=image;
+    var pre=new Image();
+    pre.onload=function(){
+      photo.src=finalSrc;
+      requestAnimationFrame(function(){ photo.classList.add('loaded'); });
+    };
+    pre.onerror=function(){
+      photo.src='idphoto.png';
+      requestAnimationFrame(function(){ photo.classList.add('loaded'); });
+    };
+    pre.src=finalSrc;
+  }
   function qrShow(){ sendTo('qr'); }
   document.querySelectorAll('.info_holder').forEach(function(el){
     el.addEventListener('click',function(){ el.classList.toggle('unfolded'); });

@@ -627,6 +627,30 @@ body .bottom_bar{
     position: static;
     margin-top: -12px;
 }
+
+.card_page .id_own_image{
+    pointer-events: none;
+    filter: grayscale(1);
+    box-shadow: 0px 0px 5px white;
+    position: absolute;
+    top: 5%;
+    left: 7.5%;
+    width: 30%;
+    border-radius: 15px;
+    height: 34%;
+    background-color: white;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 120ms ease;
+}
+
+.card_page .id_own_image.loaded{
+    opacity: 1;
+}
+
 .back_text{
     color: #014A93;
     font-weight: 500;

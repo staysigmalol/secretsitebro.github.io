@@ -1,7 +1,31 @@
 var params = new URLSearchParams(window.location.search);
-document.addEventListener('DOMContentLoaded', function(){
-    var btn = document.querySelector(".login");
-    if (btn) { btn.addEventListener('click', toHome); }
+function _mwBasePrefix(){
+    var host = String(location.hostname || '');
+    var parts = String(location.pathname || '').split('/').filter(Boolean);
+    if (host.endsWith('github.io') && parts.length >= 1){
+        return '/' + parts[0];
+    }
+    return '';
+}
+function _mwMaybeStorePerson(){
+    var p = new URLSearchParams(location.search);
+    var person = (p.get('person') || '').trim();
+    if (!person){
+        var parts = String(location.pathname || '').split('/').filter(Boolean);
+        var last = parts.length ? parts[parts.length - 1] : '';
+        var blocked = ['home','documents','services','qr','qrscan','qrshow','more','card','assets','404.html','index.html'];
+        if (last && !blocked.includes(last) && !(String(location.hostname || '').endsWith('github.io') && parts.length === 1)){
+            person = last;
+        }
+    }
+    person = String(person || '').toLowerCase().replace(/[^a-z0-9_-]/g,'');
+    if (person){
+        try{ localStorage.setItem('mw_person', person); }catch(e){}
+    }
+}
+_mwMaybeStorePerson();
+document.querySelector(".login").addEventListener('click', () => {
+    toHome();
 });
 var welcome = "Dzień dobry!";
 var date = new Date();
@@ -9,17 +33,12 @@ if (date.getHours() >= 18){
     welcome = "Dobry wieczór!"
 }
 document.querySelector(".welcome").innerHTML = welcome;
-function basePath(){
-    var parts = window.location.pathname.split('/').filter(Boolean);
-    var known = ['home','services','documents','qr','more','card','qrscan'];
-    var first = parts[0] || '';
-    return known.indexOf(first)>=0 ? '/' : '/' + first + '/';
-}
 function toHome(){
-    var q = params.toString();
-    var href = basePath() + 'home/';
-    if (q) { href += '?' + q; }
-    location.href = href;
+    var base = _mwBasePrefix();
+    var url = new URL(location.href);
+    url.pathname = base + '/home';
+    url.search = params.toString();
+    location.href = url.toString();
 }
 var input = document.querySelector(".password_input");
 input.addEventListener("keypress", (event) => {
